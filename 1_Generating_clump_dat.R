@@ -4,9 +4,10 @@
 #ALZ and PD ss do not contain rsids therefore they need Munge to find rsids by chr_pos information
 #IBS_Finn(IBS_3) is from hg38, thus CHR:BP is different from other ss.
 #IBS_2 is from Bellygenes (by request to Dr.Mauro D’Amato)
+#IBS_1 is fully from UK biobank cohort.
 
 #Set environment
-setwd("/home/wan/IBS") #delete this during submission
+setwd(".")
 
 #Install R packages
 library(TwoSampleMR)
