@@ -1,0 +1,29 @@
+﻿Phenotype,Abbreviations,Publication Year,Publication doi,pubMedIDlink,Download link,Sample size,nCase,nControl,23andME,UKB
+Attention Deficit Hyperactivity Disorder,ADHD,2022,10.1038/s41588-022-01285-8,36702997,https://figshare.com/ndownloader/files/40036684,225534,38691,186843,Not included,Not included
+Alzheimer’s Disease,ALZ,2021,10.1038/s41588-021-00921-z,34493870,https://ctg.cncr.nl/documents/p1651/PGCALZ2ExcludingUKBand23andME_METALInverseVariance_MetaAnalysis.txt.gz,398058,39918,358140,Not included,Not included
+Panic Disorder,PANIC,2019,10.1038/s41380-019-0590-2,31712720,https://figshare.com/ndownloader/files/30731276,9907,2147,7760,Not included,Not included
+Autism Spectrum Disorder,ASD,2019,10.1038/s41588-019-0344-8,30804558,https://figshare.com/ndownloader/files/28169292,46350,18381,27969,Not included,Not included
+Bipolar Disorder,BIP,2021,10.1038/s41588-021-00857-4,34002096,https://figshare.com/ndownloader/files/40036705,353899,40463,313436,Not included,Not included
+Eating Disorders,ANERV,2019,10.1038/s41588-019-0439-2,31308545,https://figshare.com/ndownloader/files/28169271,72517,16992,55525,Not included,Small
+Major depression,MDD,2018,10.1038/s41588-018-0090-3,29700475,https://figshare.com/ndownloader/files/39504667,106795,26962,79833,Not included,Not included
+Tourette syndrome,TS,2018,10.1176/appi.ajp.2018.18070857,30818990,https://figshare.com/ndownloader/files/28169940,14307,4819,9488,Not included,Not included
+Obsessive-compulsive disorder,OCD,2017,10.1038/mp.2017.154.,28761083,https://figshare.com/ndownloader/files/28169544,9725,2688,7037,Not included,Not included
+hoarding symptoms,HOA,2022,10.1038/s41398-022-02248-7,36379924,https://figshare.com/ndownloader/files/39399566,27651,-,-,Not included,Not included
+Posttraumatic stress disorder,PTSD,2019,10.1038/s41467-019-12576-w,31594949,https://figshare.com/ndownloader/files/28169727,174659,23212,151447,Not included,Large
+Schizophrenia,SCZ,2022,10.1038/s41586-022-04434-5.,35396580,https://figshare.com/ndownloader/files/34517828,129325,55193,74132,Not included,Not included
+Lacunar stroke,LS,2021,10.1016/S1474-4422(21)00031-4,33773637,https://personal.broadinstitute.org/ryank/LacunarStroke-GWAS-TraylorM-et-al-European-04122020.txt.gz,262136,7338,254798,Not included,Small
+Intracranial aneurysm,IANE,2020,10.1038/s41588-020-00725-7,33199917,https://figshare.com/ndownloader/files/29146428,65660,6242,59418,Not included,Not included
+Stroke,STROKE,2018,10.1038/s41588-018-0058-3,29531354,http://megastroke.org/download.html,446696,40585,406111,Not included,Not included
+Obstructive sleep apnea,SAPNEA,2017,10.1165/rcmb.2017-0237OC,29077507,https://personal.broadinstitute.org/ryank/chen_and_cade_et_al_2018_ahi_3_percent_european_americans.zip,5727,-,-,Not included,Not included
+Naps,NAP,2021,10.1038/s41467-020-20585-3,33568662,https://personal.broadinstitute.org/ryank/Saxena_fullUKBB_Daytimenapping_summary_stats.zip,452633,-,-,Not included,Large
+Daytime sleepiness,DSLEEP,2019,10.1038/s41467-019-11456-7,31409809,https://personal.broadinstitute.org/ryank/Saxena.fullUKBB.DaytimeSleepiness_adjBMI.sumstats.zip,452071,-,-,Not included,Large
+Insomnia,INSOM,2019,10.1038/s41588-019-0361-7,30804566,https://personal.broadinstitute.org/ryank/Saxena_fullUKBB_Insomnia_summary_stats.zip,453379,-,-,Not included,Large
+Chronotype,CHRON,2018,10.1038/s41467-018-08259-7,30696823,https://personal.broadinstitute.org/ryank/chronotype_raw_BOLT.output_HRC.only_plus.metrics_maf0.001_hwep1em12_info0.3.txt.gz,451454,-,-,Not included,Large
+Sleep duration,SDURA,2019,10.1038/s41467-019-08917-4,30846698,https://personal.broadinstitute.org/ryank/sleepdurationsumstats.txt.zip,446118,-,-,Not included,Large
+Parkinson's disease,PD,2019,10.1016/S1474-4422(19)30320-5,31701892,https://bit.ly/2ofzGrk,482730,33674,449056,Not included,Large
+Anxiety,ANXIETY,2016,10.1038/mp.2015.197,26754954,https://figshare.com/ndownloader/files/28570812,17310,-,-,Not included,Not included
+Irritable bowel syndrome,IBS_1,2018,10.1053/j.gastro.2018.03.064,29626450,http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST006001-GCST007000/GCST006304/BonfiglioF_29626450.txt.gz,346075,9576,336499,Not included,Large
+Irritable bowel syndrome,IBS_2,2021,10.1038/s41588-021-00950-8,34741163,http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90016001-GCST90017000/GCST90016564/GCST90016564_buildGRCh37.tsv,"152,833","12,852","139,981",Not included,Not included
+Irritable bowel syndrome,IBS_3,2022,finngen_R9_K11_IBS,-,https://storage.googleapis.com/finngen-public-data-r9/summary_stats/finngen_R9_K11_IBS.gz,311254,9323,301931,Not included,Not included
+Metabolites,Metabolites,2023,10.1038/s41588-022-01270-1,36635386,https://www.ebi.ac.uk/gwas/; Access number GCST90199621-90201020;,8299,-,-,Not included,Not included
+Microbiome,Microbiome,2021,10.1038/s41588-020-00763-1,33462485,https://mibiogen.gcc.rug.nl/,18340,-,-,Not included,Not included
