@@ -19,7 +19,7 @@ library("SNPlocs.Hsapiens.dbSNP155.GRCh37") #Loading this package locally if usi
 library("BSgenome.Hsapiens.1000genomes.hs37d5") #Loading this package locally if using laptop
 
 #Set environment
-setwd("/home/wan/IBS") #Delete this when submission
+setwd(".")
 
 #Loading format functions and fread functions
 source("0_fread_adj_format.R")
