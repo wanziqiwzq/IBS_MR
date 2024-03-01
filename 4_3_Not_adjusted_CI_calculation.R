@@ -6,7 +6,7 @@
 #M_I_b, M_I_se mediators to outcome
 #b_total, se_total disorders to outcome
 
-setwd("/home/wan/IBS")
+setwd(".")
 
 library(data.table)
 library(dplyr)
