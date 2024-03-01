@@ -2,12 +2,12 @@
 
 #This is an example script. Copy this to make 21 scripts and rename them by changing the last number from 1 to 21.
 
-#Save into /home/wan/IBS/Clump_5e_6_new/microbiome
+#Save into ./Clump_5e_6_new/microbiome
 
 #To improve efficiency, define 10 microbiome as a group. (Clump_data can not be run in parallel function).
 
 #Set main environment
-setwd("/home/wan/IBS")
+setwd(".")
 
 #Install R packages
 library(TwoSampleMR)
@@ -56,7 +56,7 @@ format=function(dataset, asformat="micro", snps=NULL, type="exposure") {
 }
 
 #Get all microbiome ss
-micros <- list.files(path = "/home/wan/IBS/MiBiGen", pattern = "*.txt.gz")
+micros <- list.files(path = "./MiBiGen", pattern = "*.txt.gz")
 
 #Set this group number of 10 microbiome from filename
 filename <- current_filename()
@@ -76,12 +76,12 @@ for (i in micros) {
   print(i)
   
   #For re-running R script, clumped data do not run.
-  a=list.files(path = "/home/wan/IBS/Clump_5e_6_new/microbiome", pattern = i)
+  a=list.files(path = "./Clump_5e_6_new/microbiome", pattern = i)
   if(length(a)==1) {next
     print("Clump data exists, Skip")}
   
   #read the corresponding ss
-  dat <- fread(input = paste("/home/wan/IBS/MiBiGen/",i,sep = ""),header = T)
+  dat <- fread(input = paste("./MiBiGen/",i,sep = ""),header = T)
   print(paste(i,"Done fread"))
   
   #format and clump
