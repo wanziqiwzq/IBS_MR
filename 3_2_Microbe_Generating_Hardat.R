@@ -11,7 +11,7 @@ library(parallel)
 cl <- makeCluster(40)
 
 #Set microbiome group
-micros <- list.files(path = "/home/wan/IBS/MiBiGen", pattern = "*.txt.gz")
+micros <- list.files(path = "./MiBiGen", pattern = "*.txt.gz")
 micros <- gsub(pattern = ".summary.txt.gz", replacement = "", micros)
 
 #Set function
@@ -23,7 +23,7 @@ Hardat_microbiome = function(j) {
   library(dplyr)
   
   #Loading format functions and fread functions
-  source("/home/wan/IBS/0_fread_adj_format.R")
+  source("./0_fread_adj_format.R")
   print("Loaded fread_adj_format.R")
   
   #Step 1: of-interest disorders (exposure) - microbes (outcome)
@@ -49,7 +49,7 @@ Hardat_microbiome = function(j) {
   
   #Generating harmonised data per microbiome outcome
   #Read outcome data
-  dat <- fread(input = paste("/home/wan/IBS/MiBiGen/",j,".summary.txt.gz",sep = "")) %>% data.frame()
+  dat <- fread(input = paste("./MiBiGen/",j,".summary.txt.gz",sep = "")) %>% data.frame()
   print(j)
   
   for (i in forward.exp) {
@@ -57,7 +57,7 @@ Hardat_microbiome = function(j) {
     print(i)
     
     #If harmonised data exists, skip this script
-    exist <- list.files(path = "/home/wan/IBS/twosampleMR_microbiome_harmonise/",pattern = paste(i,j,sep = "_"))
+    exist <- list.files(path = "./twosampleMR_microbiome_harmonise/",pattern = paste(i,j,sep = "_"))
     if(length(exist)>0) {
       print("Harmonised data exists")
       next}
@@ -66,7 +66,7 @@ Hardat_microbiome = function(j) {
     print(paste("Harmonising",i,j,"..."))
     
     #Import clumped data
-    clump <- fread(input = paste("/home/wan/IBS/Clump_5e_6_new/",i,".csv",sep = ""))
+    clump <- fread(input = paste("./Clump_5e_6_new/",i,".csv",sep = ""))
     clump <- data.frame(clump)
     
     #Harmonise
@@ -76,7 +76,7 @@ Hardat_microbiome = function(j) {
       
       #No SNP for harmonising
       #Copy har.dat from same exposure
-      format.file <- list.files(path = "/home/wan/IBS/twosampleMR_microbiome_harmonise", pattern = paste(i,"_",sep = ""), full.names = T)
+      format.file <- list.files(path = "./twosampleMR_microbiome_harmonise", pattern = paste(i,"_",sep = ""), full.names = T)
       har.dat <- fread(input = format.file[1]) %>% data.frame()
       har.dat[1,] <- NA
       har.dat <- har.dat[1,]
@@ -91,7 +91,7 @@ Hardat_microbiome = function(j) {
     }
 
     #Save the harmonised data
-    write.csv(har.dat,file = paste("/home/wan/IBS/twosampleMR_microbiome_harmonise/",paste(i,j,sep = "_"),".csv",sep = ""))
+    write.csv(har.dat,file = paste("./twosampleMR_microbiome_harmonise/",paste(i,j,sep = "_"),".csv",sep = ""))
   }
   
   #Step 2: microbes (exposure) - IBS (outcome)
@@ -124,7 +124,7 @@ Hardat_microbiome = function(j) {
         mutate(mr_keep=mr_keep & outcome.exposure.p) -> har.dat
     },
     error=function(e) {
-      format.file <- list.files(path = "/home/wan/IBS/twosampleMR_microbiome_harmonise", pattern = paste(j,"_",sep = ""), full.names = T)
+      format.file <- list.files(path = "./twosampleMR_microbiome_harmonise", pattern = paste(j,"_",sep = ""), full.names = T)
       har.dat <- fread(input = format.file[1]) %>% data.frame()
       har.dat[1,] <- NA
       har.dat <- har.dat[1,]
