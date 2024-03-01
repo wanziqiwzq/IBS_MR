@@ -12,7 +12,7 @@ library(dplyr)
 library(TwoSampleMR)
 
 #Set where the csv is
-setwd("/home/wan/IBS")
+setwd(".")
 
 #Import Mediators_NeuroIBS_MR_after_presso.csv
 M_NorI_MR_after_presso <- fread(input = "Mediators_NeuroIBS_MR_after_presso.csv") %>% data.frame()
@@ -21,7 +21,7 @@ M_NorI_MR_after_presso <- fread(input = "Mediators_NeuroIBS_MR_after_presso.csv"
 metabolites <- paste("GCST90",199621:201020,sep = "")
 
 #Set microbes
-microbiome <- list.files(path = "/home/wan/IBS/MiBiGen", pattern = "*.txt.gz")
+microbiome <- list.files(path = "./MiBiGen", pattern = "*.txt.gz")
 microbiome <- gsub(pattern = ".summary.txt.gz", replacement = "", microbiome)
 
 #Set diseases (exposure)
@@ -149,7 +149,7 @@ for(j in 1:nrow(dat)) {
 } #End of selection
 
 #Task 3: Combine total effects into results
-neuro_ibs <- fread(input = "/home/wan/IBS/Significant_Neuro_IBS.csv") %>% data.frame()
+neuro_ibs <- fread(input = "./Significant_Neuro_IBS.csv") %>% data.frame()
 
 Neuro_Mediators_IBS %>% left_join(neuro_ibs, by=c("Exposure_Neuro"="Exposure","Outcome_IBS"="Outcome"), keep=T) -> Neuro_Mediators_IBS
 
