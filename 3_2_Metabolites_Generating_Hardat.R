@@ -21,7 +21,7 @@ Hardat_metabolites = function(j) {
   library(dplyr)
   
   #Loading format functions and fread functions
-  source("/home/wan/IBS/0_fread_adj_format.R")
+  source("./0_fread_adj_format.R")
   print("Loaded fread_adj_format.R")
   
   #Step 1: of-interest disorders (exposure) - metabolites (outcome)
@@ -47,7 +47,7 @@ Hardat_metabolites = function(j) {
   
   #Generating harmonised data per metabolite outcome
   #Read outcome data
-  dat <- fread(input = paste("/home/wan/IBS/metabolites/",j,"_buildGRCh38.tsv.gz",sep = "")) %>% data.frame()
+  dat <- fread(input = paste("./metabolites/",j,"_buildGRCh38.tsv.gz",sep = "")) %>% data.frame()
   print(j)
   
   for (i in forward.exp) {
@@ -55,7 +55,7 @@ Hardat_metabolites = function(j) {
     print(i)
     
     #If harmonised data exists, skip this script
-    exist <- list.files(path = "/home/wan/IBS/twosampleMR_metabolites_harmonise/",pattern = paste(i,j,sep = "_"))
+    exist <- list.files(path = "./twosampleMR_metabolites_harmonise/",pattern = paste(i,j,sep = "_"))
     if(length(exist)>0) {
       print("Harmonised data exists")
       next}
@@ -64,7 +64,7 @@ Hardat_metabolites = function(j) {
     print(paste("Harmonising",i,j,"..."))
     
     #Import clumped data
-    clump <- fread(input = paste("/home/wan/IBS/Clump_5e_6_new/",i,".csv",sep = ""))
+    clump <- fread(input = paste("./Clump_5e_6_new/",i,".csv",sep = ""))
     clump <- data.frame(clump)
     
     #Harmonise
@@ -74,7 +74,7 @@ Hardat_metabolites = function(j) {
       mutate(mr_keep=mr_keep & outcome.exposure.p) -> har.dat
 
     #Save the harmonised data
-    write.csv(har.dat,file = paste("/home/wan/IBS/twosampleMR_metabolites_harmonise/",paste(i,j,sep = "_"),".csv",sep = ""))
+    write.csv(har.dat,file = paste("./twosampleMR_metabolites_harmonise/",paste(i,j,sep = "_"),".csv",sep = ""))
   }
   
   #Step 2: metabolites (exposure) - IBS (outcome)
