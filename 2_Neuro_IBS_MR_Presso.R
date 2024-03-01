@@ -1,7 +1,7 @@
 #This R script is to do sensitivity analysis for har.dat with significant pleiotropy.
 
 #Set the environment where mr_results save
-setwd("/home/wan/IBS")
+setwd(".")
 
 #Loading packages
 library(data.table)
@@ -39,7 +39,7 @@ Pair_Presso <- function(pair) {
   print(head(N_I_unpresso))
   
   #Read har.dat by pair name
-  har.dat <- fread(input = paste("/home/wan/IBS/Neuro_IBS/harmonise/",pair,".csv",sep = "")) %>% data.frame()
+  har.dat <- fread(input = paste("./Neuro_IBS/harmonise/",pair,".csv",sep = "")) %>% data.frame()
   print("Fread har.dat Done")
   
   #Run MRPRESSO
@@ -100,7 +100,7 @@ Pair_Presso <- function(pair) {
       #Parallel generate a new environment without previous files
   
       #Save the new har.dat
-      write.csv(har.dat, file = paste("/home/wan/IBS/Neuro_IBS/harmonise/",pair,"_PRESSO.csv",sep = ""), row.names = FALSE)
+      write.csv(har.dat, file = paste("./Neuro_IBS/harmonise/",pair,"_PRESSO.csv",sep = ""), row.names = FALSE)
       print("New har.dat Saved")
         
     }
@@ -116,7 +116,7 @@ Pair_Presso <- function(pair) {
   N_I_unpresso[pair_row,"MRPRESSO_result"] <- presso_results
   
   #Save
-  write.csv(N_I_unpresso[pair_row,], file = paste("/home/wan/IBS/Neuro_IBS/PRESSO_summary_",pair,".csv",sep = ""), row.names = FALSE)
+  write.csv(N_I_unpresso[pair_row,], file = paste("./Neuro_IBS/PRESSO_summary_",pair,".csv",sep = ""), row.names = FALSE)
   
   #Output
   return(c(pair, presso_results))
@@ -134,7 +134,7 @@ for (pair in N_I_need_presso$Pair) {
   pair_row=which(N_I_unpresso$Pair==pair)
   
   #Read after presso results
-  afterpresso <- fread(input = paste("/home/wan/IBS/Neuro_IBS/PRESSO_summary_",pair,".csv",sep = "")) %>% data.frame()
+  afterpresso <- fread(input = paste("./Neuro_IBS/PRESSO_summary_",pair,".csv",sep = "")) %>% data.frame()
   
   #Import result into original results
   N_I_unpresso[pair_row,] <- afterpresso[1,]
