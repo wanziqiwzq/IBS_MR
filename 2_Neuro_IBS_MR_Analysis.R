@@ -10,7 +10,7 @@ library(dplyr)
 library(data.table)
 
 #Set a directory where har.dat is
-setwd("/home/wan/IBS/Neuro_IBS/harmonise")
+setwd("./Neuro_IBS/harmonise")
 
 #Set 23 neuro diseases
 forward.exp <- c("ALZ","PD","ADHD","ANERV","ANXIETY","ASD","BIP","MDD","PANIC","OCD","HOA",
@@ -23,7 +23,7 @@ forward.out <- c("IBS_3")
 
 #Add information to previous file OR Create a data frame to record results
 mr_results <- tryCatch(
-  {mr_results <- fread(input = "/home/wan/IBS/Neuro_IBS_mr_not_presso.csv")
+  {mr_results <- fread(input = "./Neuro_IBS_mr_not_presso.csv")
    mr_results <- data.frame(mr_results)
   },
   error=function(e) {
@@ -39,7 +39,7 @@ mr_results <- tryCatch(
 k=1
 
 #Import SS_info
-SS_info <- read.csv(file = "/home/wan/IBS/0_Database_list.csv")
+SS_info <- read.csv(file = "./0_Database_list.csv")
 
 #Do the following for every pair of exposure and outcome
 for (neuro in forward.exp) {
@@ -137,7 +137,7 @@ for (neuro in forward.exp) {
     k=k+1
     
     #Save mr_results on time
-    write.csv(mr_results, file="/home/wan/IBS/Neuro_IBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE) 
+    write.csv(mr_results, file="./Neuro_IBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE) 
   }
 }
 
@@ -227,12 +227,12 @@ for (ibs in forward.out) {
     k=k+1
     
     #Save mr_results on time
-    write.csv(mr_results, file="/home/wan/IBS/Neuro_IBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE) 
+    write.csv(mr_results, file="./Neuro_IBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE) 
   }
 }
 
 mr_results$P_adjust <- p.adjust(mr_results$P_ivw_unadjust, method = "fdr") 
-write.csv(mr_results, file="/home/wan/IBS/Neuro_IBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE) #Table S1
+write.csv(mr_results, file="./Neuro_IBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE) #Table S1
 
 mr_results %>% dplyr::filter(P_ivw_unadjust < 0.05)  #Identify significant causal relationships
-write.csv(subset(mr_results, P_ivw_unadjust < 0.05), file="/home/wan/IBS/Significant_Neuro_IBS.csv", fileEncoding = "UTF-8",row.names = FALSE) #Table 1
+write.csv(subset(mr_results, P_ivw_unadjust < 0.05), file="./Significant_Neuro_IBS.csv", fileEncoding = "UTF-8",row.names = FALSE) #Table 1
