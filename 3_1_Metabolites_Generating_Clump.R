@@ -1,9 +1,9 @@
 #This R script is to generate clumped data for metabolites
 
-#Save into /home/wan/IBS/Clump_5e_6_new/metabolites
+#Save into ./Clump_5e_6_new/metabolites
 
 #Set main environment
-setwd("/home/wan/IBS")
+setwd(".")
 
 #Install R packages
 library(TwoSampleMR)
