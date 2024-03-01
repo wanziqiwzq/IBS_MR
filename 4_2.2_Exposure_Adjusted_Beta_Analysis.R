@@ -7,7 +7,7 @@ library(parallel)
 library(MVMR)
 
 #Import the file of bidirectional two-sample MR
-bi_ts_mr <- fread(input = "/home/wan/IBS/Candidate_neuro_mediators_ibs.csv") %>% data.frame()
+bi_ts_mr <- fread(input = "./Candidate_neuro_mediators_ibs.csv") %>% data.frame()
 
 #Get chain in the file
 bi_ts_mr$chain <- paste(bi_ts_mr[,"Exposure_Neuro"],bi_ts_mr[,"Mediator"],bi_ts_mr[,"Outcome_IBS"],sep="_")
@@ -16,7 +16,7 @@ bi_ts_mr$chain <- paste(bi_ts_mr[,"Exposure_Neuro"],bi_ts_mr[,"Mediator"],bi_ts_
 bi_ts_mr[,c("BETA_Exp_Out_Direct","BETA_Met_Out_adjusted","SE_Exp_Out_Direct","SE_Met_Out_adjusted","P_Exp_Out_Direct","P_Met_Out_adjusted","Fval_Exp_Out_Direct","Fval_Met_Out_adjusted","Pleiotropy_test_p")] <- NA
 
 #save it locally in time
-write.csv(bi_ts_mr,file = "/home/wan/IBS/Adjusted_Neuro_Mediators_IBS.csv")
+write.csv(bi_ts_mr,file = "./Adjusted_Neuro_Mediators_IBS.csv")
 
 #mutate chain
 Chain <- bi_ts_mr$chain #by this list in case of any lost
@@ -26,7 +26,7 @@ print(Chain)
 for (chain in Chain) {
   
   #Import mv har.dat
-  mv.hardat <- fread(input = paste("/home/wan/IBS/exposure_adjusted_harmonise_mvdat/mvdat_",chain,".csv",sep = "")) %>% data.frame()
+  mv.hardat <- fread(input = paste("./exposure_adjusted_harmonise_mvdat/mvdat_",chain,".csv",sep = "")) %>% data.frame()
   
   #mvformat
   mvdat <- format_mvmr(BXGs=mv.hardat[,c("beta.exposure","beta.mediator")],
@@ -48,7 +48,7 @@ for (chain in Chain) {
     c(ivw_mvres$Estimate,ivw_mvres$`Std. Error`,ivw_mvres$`Pr(>|t|)`,strength$exposure1,strength$exposure2,pleiotrophy$Qpval)
   
   #save it locally in time
-  write.csv(bi_ts_mr,file = "/home/wan/IBS/Adjusted_Neuro_Mediators_IBS.csv")
+  write.csv(bi_ts_mr,file = "./Adjusted_Neuro_Mediators_IBS.csv")
 }
 
 #Select significant mediators by beta_adjusted
@@ -58,5 +58,5 @@ bi_ts_mr %>% mutate(BETA_LCI_Met_Out_adjusted=BETA_Met_Out_adjusted-1.96*SE_Met_
   subset(Significance=="Significant" & P_Met_Out_adjusted<0.05) -> sig_adj
 
 #save it locally in time
-write.csv(sig_adj,file = "/home/wan/IBS/Adjusted_Significant_Neuro_Mediators_IBS.csv")
+write.csv(sig_adj,file = "./Adjusted_Significant_Neuro_Mediators_IBS.csv")
 
