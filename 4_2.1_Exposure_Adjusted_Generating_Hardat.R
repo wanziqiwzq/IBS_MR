@@ -11,7 +11,7 @@ library(dplyr)
 cl <- makeCluster(40)
 
 #Import the file of bidirectional two-sample MR
-bi_ts_mr <- fread(input = "/home/wan/IBS/Candidate_neuro_mediators_ibs.csv") %>% data.frame()
+bi_ts_mr <- fread(input = "./Candidate_neuro_mediators_ibs.csv") %>% data.frame()
 
 #To improve the efficiency, run per exp_out dat
 pair_exp_out <- c(paste(bi_ts_mr[,"Exposure_Neuro"],bi_ts_mr[,"Outcome_IBS"],sep=" "))
@@ -37,21 +37,21 @@ beta_adjust = function(exp_out) {
   
   #Step 1: Get all mediators for this exp_out chain
   #Import the file of bidirectional two-sample MR
-  bi_ts_mr <- fread(input = "/home/wan/IBS/Candidate_neuro_mediators_ibs.csv") %>% data.frame()
+  bi_ts_mr <- fread(input = "./Candidate_neuro_mediators_ibs.csv") %>% data.frame()
   
   bi_ts_mr[which(bi_ts_mr[,"Exposure_Neuro"]==exp & bi_ts_mr[,"Outcome_IBS"]==out),3] -> mediators
   
   #Skip tasks done
-  exist <- list.files(path = "/home/wan/IBS/exposure_adjusted_harmonise_mvdat",pattern = paste(paste("mvdat",exp,sep = "_"),"*",out,sep = ""))
+  exist <- list.files(path = "./exposure_adjusted_harmonise_mvdat",pattern = paste(paste("mvdat",exp,sep = "_"),"*",out,sep = ""))
   if(length(exist)==length(mediators)) {
     print("mvdat data exists")
     next}
   
   #Set the environment where the clump data is
-  setwd("/home/wan/IBS")
+  setwd(".")
   
   #Load fread and format function
-  source("/home/wan/IBS/0_fread_adj_format.R")
+  source("./0_fread_adj_format.R")
   
   #dat.exp      #dat.out      #dat.med
   extract_snp = function(dataset, asformat, snps=NULL, type, clump = clump_com){
@@ -76,13 +76,13 @@ beta_adjust = function(exp_out) {
   for (med in mediators) {   #For each mediator
     
     #Skip task done
-    exist <- list.files(path = "/home/wan/IBS/exposure_adjusted_harmonise_mvdat",pattern = paste("mvdat",exp,med,out,sep = "_"))
+    exist <- list.files(path = "./exposure_adjusted_harmonise_mvdat",pattern = paste("mvdat",exp,med,out,sep = "_"))
     if(length(exist)==1) {
       print("mvdat data exists")
       next}
     
     #Import mediator ss
-    path_to_med <- list.files(path = c("/home/wan/IBS/metabolites","/home/wan/IBS/MiBiGen"), pattern = med, full.names = T)
+    path_to_med <- list.files(path = c("./metabolites","./MiBiGen"), pattern = med, full.names = T)
     
     dat.med <- fread(input = path_to_med) %>% data.frame() %>% mutate(Pheno=med)
     
@@ -118,7 +118,7 @@ beta_adjust = function(exp_out) {
     }
     
     #Save the mv.dat locally
-    write.csv(mv.dat, file = paste(paste("/home/wan/IBS/exposure_adjusted_harmonise_mvdat/mvdat_",exp,sep = ""),med,paste(out,".csv",sep = ""),sep = "_"))
+    write.csv(mv.dat, file = paste(paste("./exposure_adjusted_harmonise_mvdat/mvdat_",exp,sep = ""),med,paste(out,".csv",sep = ""),sep = "_"))
     
     print(head(mv.dat))
   } #Screen all mediators for pair_exp_out
