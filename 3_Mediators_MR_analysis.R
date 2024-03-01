@@ -9,7 +9,7 @@ library(dplyr)
 library(data.table)
 
 #Set a directory where har.dat is
-setwd("/home/wan/IBS")
+setwd(".")
 
 #Set diseases (exposure)
 forward.exp <- c("ADHD","BIP","MDD","HOA","INSOM")
@@ -21,12 +21,12 @@ forward.out <- c("IBS_3")
 metabolites <- paste("GCST90",199621:201020,sep = "")
 
 #Set microbes
-microbiome <- list.files(path = "/home/wan/IBS/MiBiGen", pattern = "*.txt.gz")
+microbiome <- list.files(path = "./MiBiGen", pattern = "*.txt.gz")
 microbiome <- gsub(pattern = ".summary.txt.gz", replacement = "", microbiome)
 
 #Add information to previous file OR Create a data frame to record results
 mr_results <- tryCatch(
-  {mr_results <- fread(input = "/home/wan/IBS/Mediators_NeuroIBS_mr_not_presso.csv")
+  {mr_results <- fread(input = "./Mediators_NeuroIBS_mr_not_presso.csv")
   mr_results <- data.frame(mr_results)
   },
   error=function(e) {
@@ -42,7 +42,7 @@ mr_results <- tryCatch(
 k=1
 
 #Import SS_info
-SS_info <- read.csv(file = "/home/wan/IBS/0_Database_list.csv")
+SS_info <- read.csv(file = "./0_Database_list.csv")
 
 #Set analyse function
 mr_interpretation = function(i,j) {
@@ -51,7 +51,7 @@ mr_interpretation = function(i,j) {
   metabolites <- paste("GCST90",199621:201020,sep = "")
   
   #Set microbes
-  microbiome <- list.files(path = "/home/wan/IBS/MiBiGen", pattern = "*.txt.gz")
+  microbiome <- list.files(path = "./MiBiGen", pattern = "*.txt.gz")
   microbiome <- gsub(pattern = ".summary.txt.gz", replacement = "", microbiome)
   
   #Test if file exists
@@ -146,7 +146,7 @@ mr_interpretation = function(i,j) {
   print(mr_results[k,])
   
   #Save mr_results on time
-  write.csv(mr_results, file="/home/wan/IBS/Mediators_NeuroIBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE)
+  write.csv(mr_results, file="./Mediators_NeuroIBS_mr_not_presso.csv", fileEncoding = "UTF-8",row.names = FALSE)
   print(paste(i,j,"interpretation done"))
   return(mr_results)
 }
