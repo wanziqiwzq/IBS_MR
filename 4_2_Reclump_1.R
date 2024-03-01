@@ -11,10 +11,10 @@ library(ieugwasr)
 library(scriptName)
 
 #Set the environment where the clump data is
-setwd("/home/wan/IBS/Clump_5e_6_new")
+setwd("./Clump_5e_6_new")
 
 #Import the file of bidirectional two-sample MR
-bi_ts_mr <- fread(input = "/home/wan/IBS/Candidate_neuro_mediators_ibs.csv") %>% data.frame()
+bi_ts_mr <- fread(input = "./Candidate_neuro_mediators_ibs.csv") %>% data.frame()
 
 #mutate chain
 Chain <- c(paste(bi_ts_mr[,"Exposure_Neuro"],bi_ts_mr[,"Mediator"],bi_ts_mr[,"Outcome_IBS"],sep=" "))
@@ -37,7 +37,7 @@ for (chain in Chain[(5*n-4):(5*n)]) {
   print(paste(j,k,i))
   
   #If harmonised data exists, skip this script
-  exist <- list.files(path = "/home/wan/IBS/Clump_5e_6_new/exposure_adjusted",pattern = paste(j,k,i,sep = "_"))
+  exist <- list.files(path = "./Clump_5e_6_new/exposure_adjusted",pattern = paste(j,k,i,sep = "_"))
   if(length(exist)>0) {
     print("Re-clump data exists")
     next}
@@ -66,8 +66,8 @@ for (chain in Chain[(5*n-4):(5*n)]) {
   clump_new = function(dataset) {
     ieugwasr::ld_clump_local(dat = dplyr::tibble(rsid=dataset$SNP, pval=dataset$pval.exposure),
                              clump_kb = 5000, clump_r2 = 0.001, clump_p = 1,
-                             bfile = "/home/wan/IBS/1kg.v3/EUR",
-                             plink_bin = "/home/wan/IBS/plink_linux_x86_64_20230116/plink") -> snpafterclump
+                             bfile = "./1kg.v3/EUR",
+                             plink_bin = "./plink_linux_x86_64_20230116/plink") -> snpafterclump
     clumpset <- subset(dataset, SNP %in% snpafterclump$rsid)
     return(clumpset)
   }
@@ -76,7 +76,7 @@ for (chain in Chain[(5*n-4):(5*n)]) {
   clump_com <- clump_com %>% clump_new() %>% mutate(chr_pos=paste(chr.exposure,pos.exposure,sep = ":"))
   
   #Save it locally
-  write.csv(clump_com, file = paste("/home/wan/IBS/Clump_5e_6_new/exposure_adjusted/",paste(j,k,i,sep = "_"),".csv",sep = ""), row.names = F)
+  write.csv(clump_com, file = paste("./Clump_5e_6_new/exposure_adjusted/",paste(j,k,i,sep = "_"),".csv",sep = ""), row.names = F)
   
   print(paste(j,k,i,"Re-clump Done"))
 }
