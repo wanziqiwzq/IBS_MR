@@ -10,7 +10,7 @@ library(parallel)
 library(RMediation)
 
 #File of significant after exposure_adjusted
-dat.input <- fread(input = "/home/wan/IBS/Adjusted_Significant_Neuro_Mediators_IBS.csv") %>% data.frame()
+dat.input <- fread(input = "./Adjusted_Significant_Neuro_Mediators_IBS.csv") %>% data.frame()
 
 #read chain
 Sig_chain <- dat.input$chain
@@ -27,7 +27,7 @@ indirect_effect_mediation = function(chain) {
   library(bruceR)
   
   #read mv.dat
-  mv.hardat <- fread(input = paste("/home/wan/IBS/exposure_adjusted_harmonise_mvdat/mvdat_",chain,".csv",sep = "")) %>% data.frame()
+  mv.hardat <- fread(input = paste("./exposure_adjusted_harmonise_mvdat/mvdat_",chain,".csv",sep = "")) %>% data.frame()
   
   #set a data.frame for output
   sig_adj_ci <- data.frame(matrix(nrow = 1)) %>% select(-matrix.nrow...1.) %>% mutate(chain=chain) %>%
@@ -44,7 +44,7 @@ indirect_effect_mediation = function(chain) {
   sig_adj_ci[1,6:9] <- c(Process.results$n1,Process.results$n1.ci[1:2],Process.results$n1.p)
 
   
-  write.csv(sig_adj_ci, file = paste("/home/wan/IBS/indirect_effect_single/mediation_",chain,"_indirect_effect_ci.csv",sep = ""),row.names = F)
+  write.csv(sig_adj_ci, file = paste("./indirect_effect_single/mediation_",chain,"_indirect_effect_ci.csv",sep = ""),row.names = F)
   print("Saved")
 }
 
@@ -56,17 +56,17 @@ sig_adj_ci_total <- data.frame(c())
 
 for (chain in Sig_chain) {
   
-  dat <- fread(input = paste("/home/wan/IBS/indirect_effect_single/mediation_",chain,"_indirect_effect_ci.csv",sep = "")) %>% data.frame()
+  dat <- fread(input = paste("./indirect_effect_single/mediation_",chain,"_indirect_effect_ci.csv",sep = "")) %>% data.frame()
   
   sig_adj_ci_total <- rbind(sig_adj_ci_total, dat)
   
-  write.csv(sig_adj_ci_total, file = "/home/wan/IBS/Adjusted_mediation_indirect_effect_ci.csv",row.names = F)
+  write.csv(sig_adj_ci_total, file = "./Adjusted_mediation_indirect_effect_ci.csv",row.names = F)
 }
 
 #read chain
 dat.input %>% left_join(sig_adj_ci_total, by=c("chain"="chain")) -> dat.output
 
-write.csv(dat.output, file = "/home/wan/IBS/Indirect_effect_CI.csv") 
+write.csv(dat.output, file = "./Indirect_effect_CI.csv") 
 
 #Method 2: Product or Difference by bootstrap
 indirect_effect_2 = function(chain) {
@@ -78,7 +78,7 @@ indirect_effect_2 = function(chain) {
   library ("boot")
   
   #read mv.dat
-  mv.hardat <- fread(input = paste("/home/wan/IBS/exposure_adjusted_harmonise_mvdat/mvdat_",chain,".csv",sep = "")) %>% data.frame()
+  mv.hardat <- fread(input = paste("./exposure_adjusted_harmonise_mvdat/mvdat_",chain,".csv",sep = "")) %>% data.frame()
   
   #set a data.frame for output
   sig_adj_ci <- data.frame(matrix(nrow = 1)) %>% select(-matrix.nrow...1.) %>% mutate(chain=chain) %>%
@@ -182,7 +182,7 @@ indirect_effect_2 = function(chain) {
   sig_adj_ci[1,12:13] <- boot_ci$normal[2:3]
   
   
-  write.csv(sig_adj_ci, file = paste("/home/wan/IBS/indirect_effect_single/2_",chain,"_indirect_effect_ci.csv",sep = ""),row.names = F)
+  write.csv(sig_adj_ci, file = paste("./indirect_effect_single/2_",chain,"_indirect_effect_ci.csv",sep = ""),row.names = F)
   print("Saved")
 }
 
@@ -194,17 +194,17 @@ sig_adj_ci_total <- data.frame(c())
 
 for (chain in Sig_chain) {
   
-  dat <- fread(input = paste("/home/wan/IBS/indirect_effect_single/2_",chain,"_indirect_effect_ci.csv",sep = "")) %>% data.frame()
+  dat <- fread(input = paste("./indirect_effect_single/2_",chain,"_indirect_effect_ci.csv",sep = "")) %>% data.frame()
   
   sig_adj_ci_total <- rbind(sig_adj_ci_total, dat)
   
-  write.csv(sig_adj_ci_total, file = "/home/wan/IBS/Adjusted_2_significant_indirect_effect_ci.csv",row.names = F)
+  write.csv(sig_adj_ci_total, file = "./Adjusted_2_significant_indirect_effect_ci.csv",row.names = F)
 }
 
 #read chain
 dat.output %>% left_join(sig_adj_ci_total, by=c("chain"="chain")) -> dat.output
 
-write.csv(dat.output, file = "/home/wan/IBS/Indirect_effect_CI.csv") 
+write.csv(dat.output, file = "./Indirect_effect_CI.csv") 
 
 ##Method 3: delta method
 #Calculate indirect effects
@@ -284,5 +284,5 @@ dat.output <- prop_ci_table(dat.output,
                                name.b2 = "BETA_Met_Out_adjusted", name.se2 = "SE_Met_Out_adjusted",
                                name.b.total="b_total",name.se.total="se_total")
 
-write.csv(dat.output, file = "/home/wan/IBS/Indirect_effect_CI.csv") 
+write.csv(dat.output, file = "./Indirect_effect_CI.csv") 
 
